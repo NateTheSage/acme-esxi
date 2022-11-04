@@ -9,7 +9,5 @@ cd "${LOCALDIR}/.." || exit
 
 docker rmi -f acme-esxi 2> /dev/null
 rm -rf artifacts
-docker build -t acme-esxi -f build/Dockerfile .
-docker run -i -v "${PWD}"/artifacts:/artifacts acme-esxi sh << COMMANDS
-cp acme-esxi/build/acme-esxi* /artifacts
-COMMANDS
+docker build -t vibauthor -f build/Dockerfile.vibauthor .
+docker run -it -v $(pwd):/acme-esxi --rm --name vibauthor vibauthor /bin/bash /acme-esxi/build/create_vib.sh

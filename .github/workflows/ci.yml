@@ -1,4 +1,4 @@
-name: w2c-letsencrypt-esxi
+name: acme-esxi
 
 on:
   push:
@@ -21,10 +21,9 @@ jobs:
       - name: Store VIB and offline bundle
         uses: actions/upload-artifact@v2
         with:
-          name: w2c-letsencrypt-esxi
+          name: acme-esxi
           path: |
-            artifacts/w2c-letsencrypt-esxi.vib
-            artifacts/w2c-letsencrypt-esxi-offline-bundle.zip
+            build/acme-esxi-offline-bundle.zip
           if-no-files-found: error
           
   release:
@@ -36,7 +35,7 @@ jobs:
       - name: Retrieve build artifacts
         uses: actions/download-artifact@v2
         with:
-          name: w2c-letsencrypt-esxi
+          name: acme-esxi
 
       - name: Create release
         id: create_release
@@ -44,7 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body: w2c-letsencrypt-esxi
+          body: acme-esxi
           files: |
-            w2c-letsencrypt-esxi.vib
-            w2c-letsencrypt-esxi-offline-bundle.zip
+            acme-esxi-offline-bundle.zip

@@ -7,7 +7,6 @@
 LOCALDIR=$(dirname "$(readlink -f "$0")")
 cd "${LOCALDIR}/.." || exit
 
-docker rmi -f acme-esxi 2> /dev/null
-rm -rf artifacts
-docker build -t vibauthor -f build/Dockerfile.vibauthor .
+docker rmi -f vibauthor 2> /dev/null
+docker build -t vibauthor -f ./build/Dockerfile.vibauthor .
 docker run -it -v $(pwd):/acme-esxi --rm --name vibauthor vibauthor /bin/bash /acme-esxi/build/create_vib.sh

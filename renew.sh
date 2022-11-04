@@ -110,7 +110,7 @@ if [ -n "$CERT" ] ; then
   cp -p "$SSL_CERT_FILE" "$VMWARE_CA"
   log "Success: Obtained and installed a certificate from Let's Encrypt / CA."
 else
-  if [ "$REGENERATE_CERT" == false ]
+  if [ "$REGENERATE_CERT" == false ]; then
   log "Error: No cert obtained from Let's Encrypt / CA. Generating a self-signed certificate."
   /sbin/generate-certificates
   fi
